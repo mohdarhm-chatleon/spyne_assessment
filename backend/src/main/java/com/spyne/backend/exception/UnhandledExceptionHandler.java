@@ -19,7 +19,7 @@ public class UnhandledExceptionHandler {
     @ExceptionHandler
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     ErrorResponse onAnyException(Exception e) {
-        logger.error("INTERNAL", e);
+        logger.error("INTERNAL -> logging done from unhandled exception handler -> {}", e.getMessage());
         // Ideally we can send mails and shit here, pretty cool stuff
         return new com.spyne.backend.exception.ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(),"Internal Error");
     }
