@@ -10,13 +10,17 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+import jakarta.persistence.UniqueConstraint;
+
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Entity
-@Table(name = "email_hash_mapping")
+@Table(name = "email_hash_mapping" , uniqueConstraints = {
+        @UniqueConstraint(name = "uc_email", columnNames = {"email"})
+})
 public class EmailHashMapping extends Base {
 
     // Never do this!
