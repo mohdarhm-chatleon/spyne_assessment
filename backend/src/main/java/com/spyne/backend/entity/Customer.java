@@ -43,14 +43,13 @@ public class Customer extends Base {
 
     @Embedded
     @AttributeOverrides({
-            @AttributeOverride(name = "cognitoId", column = @Column(name = "customer_cognito_id")),
             @AttributeOverride(name = "email", column = @Column(name = "customer_email")),
             @AttributeOverride(name = "name", column = @Column(name = "customer_name"))
     })
     private User user;
 
     @Enumerated(jakarta.persistence.EnumType.STRING)
-    @Column(name = "status", nullable = false, columnDefinition = "varchar()")
+    @Column(name = "status", nullable = false, length = 50)
     private CustomerStatus status;
 
     @PrePersist

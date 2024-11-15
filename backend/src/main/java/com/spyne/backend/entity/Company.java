@@ -36,8 +36,8 @@ public class Company extends Base {
 
     @Embedded
     @AttributeOverrides({
-            @AttributeOverride(name = "email", column = @Column(name = "dealer_email")),
-            @AttributeOverride(name = "name", column = @Column(name = "dealer_name"))
+            @AttributeOverride(name = "email", column = @Column(name = "company_email")),
+            @AttributeOverride(name = "name", column = @Column(name = "company_name"))
     })
     private User user;
 

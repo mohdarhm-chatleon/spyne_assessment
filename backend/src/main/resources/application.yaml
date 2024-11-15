@@ -1,16 +1,4 @@
 spring:
-  application:
-    name: backend
-  banner:
-    location: classpath:/banner.txt
-
-  datasource:
-    url: jdbc:mysql://localhost:3306/spyne
-    username: root
-    password: arhum123
-    initialization-mode: always
-    hikari:
-      maximum-pool-size: 2
   jpa:
     properties:
       hibernate:
@@ -20,3 +8,67 @@ spring:
       ddl-auto: create-drop
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+  application:
+    name: backend
+
+  profiles:
+    default: local
+    active: local
+
+  banner:
+    location: classpath:/banner.txt
+
+  api-docs:
+    path: /misc/api-docs
+
+  swagger-ui:
+    path: /misc/swagger-ui.html
+    enabled: true
+    tagsSorter: alpha
+    operationsSorter: method
+
+logging:
+  level:
+    org:
+      springframework:
+        jdbc: DEBUG
+    com:
+      spyne:
+        backend: DEBUG
+
+---
+env: HOSTED
+
+spring:
+  config:
+    activate:
+      on-profile: hosted
+
+  datasource:
+    url: >
+      jdbc:mysql://spyne-db-spyne-project.f.aivencloud.com:21811/defaultdb?ssl-mode=REQUIRED
+    username: avnadmin
+    password: AVNS_wAQF1zLnfUDEkU5yBh4
+    initialization-mode: always
+    hikari:
+      maximum-pool-size: 2
+
+
+---
+env: LOCAL
+
+spring:
+  config:
+    activate:
+      on-profile: local
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/spyne
+    username: root
+    password: arhum123
+    initialization-mode: always
+    hikari:
+      maximum-pool-size: 2
+
+

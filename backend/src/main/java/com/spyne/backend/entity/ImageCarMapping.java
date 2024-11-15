@@ -12,6 +12,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 import lombok.Getter;
@@ -20,18 +21,18 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "tag")
-public class Tag extends Base {
+@Table(name = "image_car_mapping")
+public class ImageCarMapping extends Base {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "tag_id", nullable = false)
-    private String tagId;
+    @Column(name = "image_id")
+    private String imageId;
 
-    @Column(name = "name", length = 50, nullable = false)
-    private String name;
+    @Column(name = "car_id")
+    private String carId;
 
 }

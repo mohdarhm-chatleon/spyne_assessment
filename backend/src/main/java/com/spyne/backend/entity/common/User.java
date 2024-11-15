@@ -1,7 +1,11 @@
 package com.spyne.backend.entity.common;
 
+import com.spyne.backend.model.enums.Role;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
+
+import jakarta.persistence.Enumerated;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -28,4 +32,8 @@ public class User {
 
     @Column(name = "email_verified", nullable = false)
     private Boolean emailVerified;
+
+    @Enumerated(jakarta.persistence.EnumType.STRING)
+    @Column(name = "role", nullable = false, length = 50)
+    private Role role;
 }
