@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: backend
+  banner:
+    location: classpath:/banner.txt
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/spyne
+    username: root
+    password: arhum123
+    initialization-mode: always
+    hikari:
+      maximum-pool-size: 2
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+    hibernate:
+      ddl-auto: create-drop
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
