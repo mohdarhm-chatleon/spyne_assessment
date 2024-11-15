@@ -47,9 +47,9 @@ spring:
 
   datasource:
     url: >
-      jdbc:mysql://spyne-db-spyne-project.f.aivencloud.com:21811/defaultdb?ssl-mode=REQUIRED
-    username: avnadmin
-    password: AVNS_wAQF1zLnfUDEkU5yBh4
+      jdbc:mysql://${hostedUrl}?ssl-mode=REQUIRED
+    username: ${hostedUsername}
+    password: ${hostedPassword}
     initialization-mode: always
     hikari:
       maximum-pool-size: 2
