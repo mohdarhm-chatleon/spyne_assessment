@@ -40,7 +40,12 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
             Claims claims = jwtTokenUtil.verifySignatureAndGetAllClaims(jwtToken);
             isValidToken = jwtTokenUtil.validateClaims(claims);
+            role = jwtTokenUtil.getRoleFromToken(claims);
+
             email = (String) claims.get("email");
+
+        } else {
+            logger.warn("JWT Token does not begin with Bearer String");
         }
 
             UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
