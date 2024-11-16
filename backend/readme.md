@@ -33,4 +33,8 @@ this filter is one of many filters that spring give u the flexibility to add bef
 3. now, take a look at `authUtils` where ive written some functions to extract current user in the security context; in other words the currently logged in user. (this is entirely based on the tokens and no sessions are stored)
 
 Coming back to tokens, the generation is pretty much the most basic auth u can think about, 
-taking the password, hashing / salting it, then comparing. if passed, a token is generated and returned as response.
+taking the password, hashing / salting it, then comparing. if passed, a token is generated and returned as response. (see `commonAuthServiceImpl`)
+<br>
+the `application.yaml` pretty much explains the current environment variables and other configurations, including auth. the `create-drop` mode in ddl-auto denotes that spring will create all tables based on the entity configurations
+
+entities are nothing but db tables. I did not spend any time thinking about data modelling and pretty much just went with the flow. (NEVER DO THIS)

@@ -8,7 +8,7 @@ FROM eclipse-temurin:17 AS thin
 
 WORKDIR /coreapiserv
 COPY --from=thick /wow/infra/starter.sh .
-COPY --from=thick /wow/target/coreapiserv-0.0.1-SNAPSHOT.jar .
+COPY --from=thick /wow/target/backend-0.0.1-SNAPSHOT.jar .
 
 RUN chmod 755 starter.sh
 CMD bash -c "./starter.sh"
