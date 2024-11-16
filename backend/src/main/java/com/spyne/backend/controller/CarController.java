@@ -56,7 +56,7 @@ public class CarController {
 
     @Operation(summary = "Delete a car by ID")
     @DeleteMapping("/{carId}")
-    public CommonResponse deleteCar(@PathVariable String carId){
+    public CommonResponse deleteCar(@PathVariable String carId) throws BaseException{
         return carService.deleteCarById(carId);
     }
 

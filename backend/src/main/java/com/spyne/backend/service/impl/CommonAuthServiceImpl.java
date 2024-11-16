@@ -52,8 +52,8 @@ public class CommonAuthServiceImpl implements CommonAuthService {
 
         LoginResponse response = new LoginResponse();
         String encodedHash = PasswordUtils.hashPassword(request.getPassword());
-        EmailHashMapping emailHashMappingForCurrentUser = emailHashMappingRepo.findByEmailAndHashAndRole(request.getEmail(), encodedHash, request.getUserRole());
 
+        EmailHashMapping emailHashMappingForCurrentUser = emailHashMappingRepo.findByEmailAndHashAndRole(request.getEmail(), encodedHash, request.getUserRole());
         if (Objects.isNull(emailHashMappingForCurrentUser)){
             throw new BadRequestException(HttpStatus.BAD_REQUEST.value(), "Invalid Credentials");
         } else {

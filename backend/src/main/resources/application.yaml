@@ -13,6 +13,12 @@ spring:
       ddl-auto: create-drop
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    servlet:
+      multipart:
+        enabled: true
+        file-size-threshold: 10MB
+        max-file-size: 10MB
+        max-request-size: 11MB
 
   application:
     name: backend
@@ -37,6 +43,11 @@ springdoc: # http://localhost:8080/misc/swagger-ui/index.html
     enabled: true
     tagsSorter: alpha
     operationsSorter: method
+info:
+  app:
+    name: Spyne Sample app API Service
+    description: just the APIs bro
+    version: 1.0.0
 
 logging:
   level:

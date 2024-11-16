@@ -39,6 +39,16 @@ public class Car extends Base {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "dealer_id", nullable = false, unique = true, length = 50)
+    private String dealerId;
+
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="dealer_id", referencedColumnName = "dealer_id",insertable = false, updatable = false)
+    private Dealer dealer;
+
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="company_id", referencedColumnName = "company_id",insertable = false, updatable = false)
     private Company company;

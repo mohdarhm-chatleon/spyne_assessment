@@ -9,7 +9,9 @@ import java.util.List;
 @Getter
 @Setter
 public class CarCreateRequest {
-    private String title;
+    private String name;
+    private String dealerId;
+    private String companyId;
     private String description;
     private List<String> tags;
     private List<MultipartFile> images;
