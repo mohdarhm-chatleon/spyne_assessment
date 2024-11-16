@@ -33,7 +33,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
-        // Some logic will go here. right now everyone passes the security challenge and are admins
         final String tokenFromRequest = request.getHeader("Authorization");
 
         String email = null;
@@ -71,7 +70,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 // So it passes the Spring Security Configurations successfully.
                 SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
             }
-            filterChain.doFilter(request, response);
         }
+        filterChain.doFilter(request, response);
     }
 }

@@ -24,9 +24,6 @@ spring:
   banner:
     location: classpath:/banner.txt
 
-  api-docs:
-    path: /misc/api-docs
-
 jwt:
   audience: "${audienceId}"
   secret: "${signingSecret}"
