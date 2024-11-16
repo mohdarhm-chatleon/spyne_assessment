@@ -2,9 +2,14 @@ package com.spyne.backend.entity;
 
 import com.spyne.backend.entity.common.Base;
 
+import com.spyne.backend.model.enums.CustomerStatus;
+
+import com.spyne.backend.model.enums.Role;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -34,4 +39,8 @@ public class EmailHashMapping extends Base {
 
     @Column(name = "password_hash", nullable = false, length = 255)
     private String hash;
+
+    @Enumerated(jakarta.persistence.EnumType.STRING)
+    @Column(name = "role", nullable = false, length = 50)
+    private Role role;
 }

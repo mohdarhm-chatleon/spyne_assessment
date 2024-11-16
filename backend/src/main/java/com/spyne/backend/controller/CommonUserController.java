@@ -2,6 +2,7 @@ package com.spyne.backend.controller;
 
 import com.spyne.backend.exception.BaseException;
 import com.spyne.backend.model.request.user.UserSignInRequest;
+import com.spyne.backend.model.request.user.UserSignUpRequest;
 import com.spyne.backend.model.response.user.LoginResponse;
 import com.spyne.backend.service.contract.CommonAuthService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -34,5 +35,14 @@ public class CommonUserController {
     @Operation(summary = "Login")
     public LoginResponse login(@RequestBody @Valid UserSignInRequest loginRequest) throws BaseException {
         return commonAuthService.loginUser(loginRequest);
+    }
+
+    @PostMapping(
+            value = "/signup",
+            consumes = MediaType.APPLICATION_JSON_VALUE
+    )
+    @Operation(summary = "Create a user account")
+    public LoginResponse signUp(@RequestBody @Valid UserSignUpRequest signUpRequest) throws BaseException {
+        return commonAuthService.signUpUser(signUpRequest);
     }
 }

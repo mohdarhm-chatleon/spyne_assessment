@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.security.NoSuchAlgorithmException;
+
 @RestControllerAdvice
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class GlobalExceptionHandler {
@@ -20,6 +22,13 @@ public class GlobalExceptionHandler {
     ErrorResponse onBadRequestException(BadRequestException ex) {
         logger.error(ex.getMessage(), ex.getCode());
         return new ErrorResponse(ex.getCode(), ex.getMessage());
+    }
+
+    @ExceptionHandler(NoSuchAlgorithmException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    ErrorResponse onNoSuchAlgorithmException(NoSuchAlgorithmException e){
+        logger.error("Error finding an algorithm -> {}",e.getMessage());
+        return new ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Something went wrong");
     }
 
     // can easily handle more.

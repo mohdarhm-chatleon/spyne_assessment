@@ -1,5 +1,7 @@
-package com.spyne.backend.config.auth;
+package com.spyne.backend.config;
 
+import com.spyne.backend.config.auth.JwtAuthenticationEntryPoint;
+import com.spyne.backend.config.auth.JwtRequestFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

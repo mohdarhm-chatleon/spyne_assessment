@@ -27,6 +27,11 @@ spring:
   api-docs:
     path: /misc/api-docs
 
+jwt:
+  audience: "${audienceId}"
+  secret: "${signingSecret}"
+  expiration: 3600 # 1 hr
+
 springdoc: # http://localhost:8080/misc/swagger-ui/index.html
   api-docs:
     path: /misc/api-docs
