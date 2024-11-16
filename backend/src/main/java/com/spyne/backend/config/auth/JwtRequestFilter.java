@@ -12,6 +12,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -24,6 +26,9 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
+
+    @Autowired
+    private CommonJwtDetailsService commonJwtDetailsService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -48,12 +53,25 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             logger.warn("JWT Token does not begin with Bearer String");
         }
 
-            UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
-                "defaultUser",
-                null,
-                List.of(Role.ADMIN)
-        );
-        SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
-        filterChain.doFilter(request, response);
+        if (Objects.nonNull(email)
+                && Objects.nonNull(role)
+                && isValidToken
+                && SecurityContextHolder.getContext().getAuthentication() == null) {
+
+            UserDetails userDetails = null;
+            userDetails = this.commonJwtDetailsService.loadUserByEmail(email, role);
+
+            if (Objects.nonNull(userDetails)) {
+                UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
+                        userDetails, null, userDetails.getAuthorities());
+                usernamePasswordAuthenticationToken
+                        .setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+
+                // After setting the Authentication in the context, we specify that the current user is authenticated.
+                // So it passes the Spring Security Configurations successfully.
+                SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
+            }
+            filterChain.doFilter(request, response);
+        }
     }
 }
