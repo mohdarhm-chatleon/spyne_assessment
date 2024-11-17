@@ -6,7 +6,7 @@ RUN mvn clean install
 
 FROM eclipse-temurin:17 AS thin
 
-WORKDIR /coreapiserv
+WORKDIR /wow
 COPY --from=thick /wow/infra/starter.sh .
 COPY --from=thick /wow/target/backend-0.0.1-SNAPSHOT.jar .
 
